@@ -1,0 +1,181 @@
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static sun.misc.Version.print;
+
+public class MainProject {
+
+    public static void main(String[] args) {
+//        ----------------------------------
+//        int[] list = new int[]{ 1, 1, 2, 3, 5, 6, 6, 8, 9, 10};
+//        int x= 5;
+//        System.out.println(Sum2num(list,x));
+//        ----------------------------------
+//        int[] list = new int[]{2,4,6,7,3,1,9,5};
+//        for (int a:BubbleSort(list)){
+//            System.out.println(a);
+//        }
+//        ----------------------------------
+        int[] list = {2,4,6,7,3,1,10,8,9,5};
+        int x =10;
+        MergeSum(list,x);
+        System.out.println(ls4);
+//        ######################
+//        ----------------------------------
+//        int[] list = new int[]{ 1, 1, 2, 3, 5, 6, 6, 8, 9, 10};
+//        MergeRep(list);
+//        System.out.println(ls3);
+//        ----------------------------------
+//        ----------------------------------
+//        ----------------------------------
+    }
+
+
+//    first method as question 2
+    private static int b =0;
+    private static List<Integer> ls = new ArrayList<>();
+    public static List<Integer> Sum2num(int[] a, int x){
+        try {
+            for (int i=0;i<a.length;i++){
+                if(a[b]+a[i]==x){
+                    ls.add(a[b]);
+                    ls.add(a[i]);
+                }
+            }
+            b++;
+            if (b < a.length){
+                Sum2num(a,x);
+            }else {}
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return ls;
+    }
+
+
+//    first method as question Sort
+    public static int[] BubbleSort(int[] a){
+        for (int i=0;i < a.length-1;i++){
+            for (int j=i+1;j < a.length;j++){
+                if (a[i] > a[j]){
+                    int b = a[i];
+                    a[i] = a[j];
+                    a[j] = b;
+                }
+            }
+        }
+        return a;
+    }
+
+
+//    second method as question 2
+    public static void MergeSum(int[] a, int x){
+        int len = a.length;
+        int i;
+        int[] nums;
+        if (len %7 == 0){
+            i = len /7;
+        }else if (len %5 == 0){
+            i = len /5;
+        }else if (len %3 == 0){
+            i = len /3;
+        }else if (len %2 == 0){
+            i = len /2;
+        }else {
+            i = 1;
+        }
+
+        for (int b=0;b<a.length/i;b++){
+            nums = Arrays.copyOfRange(a, b*i,(b+1)*i);
+            Merge1(nums,x);
+        }
+    }
+    private static List<Integer> ls1 = new ArrayList<Integer>(),ls4 = new ArrayList<Integer>();
+    public static void Merge1(int[] num, int x){
+        for (int a=0;a<num.length;a++) {
+            if (ls1.size() == 0) {
+                ls1.add(num[a]);
+            } else{
+                for (int b = 0; b < ls1.size(); b++) {
+                    if (num[a] == ls1.get(b)){
+                        break;
+                    }else {
+                        ls1.add(num[a]);
+                    }
+                    if (num[a]+ls1.get(b)==x) {
+                        if (ls4.size() == 0){
+                            ls4.add(num[a]);
+                            ls4.add(ls1.get(b));
+                        }else {
+                            for (int c = 0; c < ls4.size(); c++) {
+                                System.out.println("8 "+num[a] +" "+ls1.get(b));
+                                if (ls4.get(c) == num[a]) {
+                                    System.out.println("9");
+                                    break;
+                                } else {
+                                    System.out.println("0");
+                                    ls4.add(num[a]);
+                                    ls4.add(ls1.get(b));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+//    first method as question 1
+    public static void MergeRep(int[] a){
+        int len = a.length;
+        int i;
+        int[] nums;
+        if (len %7 == 0){
+            i = len /7;
+        }else if (len %5 == 0){
+            i = len /5;
+        }else if (len %3 == 0){
+            i = len /3;
+        }else if (len %2 == 0){
+            i = len /2;
+        }else {
+            i = 1;
+        }
+
+        for (int b=0;b<a.length/i;b++){
+            nums = Arrays.copyOfRange(a, b*i,(b+1)*i);
+            Merge2(nums);
+        }
+    }
+    private static List<Integer> ls2= new ArrayList<Integer>(),ls3 = new ArrayList<Integer>();
+    public static void Merge2(int[] num){
+        for (int a=0;a<num.length;a++) {
+            if (ls2.size() == 0) {
+                ls2.add(num[a]);
+            } else{
+                for (int b = 0; b < ls2.size(); b++) {
+                    if (num[a] == ls2.get(b)) {
+                        if (ls3.size() == 0){
+                            ls3.add(num[a]);
+                            break;
+                        }else {
+
+                            for (int c = 0; c < ls3.size(); c++) {
+                                if (ls3.get(c) == num[a]) {
+                                } else {
+                                    ls3.add(ls2.get(b));
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+                ls2.add(num[a]);
+            }
+        }
+
+    }
+}
